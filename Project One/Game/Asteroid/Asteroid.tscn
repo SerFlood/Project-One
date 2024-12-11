@@ -1,0 +1,145 @@
+[gd_scene load_steps=21 format=3 uid="uid://csneqmc0531sq"]
+
+[ext_resource type="Script" path="res://Scripts/Game/asteroid.gd" id="1_5wwmw"]
+[ext_resource type="Texture2D" uid="uid://ybhyctu1lmyv" path="res://Assets/Enemy/AsteroidFlame.png" id="1_k5155"]
+[ext_resource type="Texture2D" uid="uid://dcw1f4odi23vf" path="res://Assets/Enemy/Asteroid.png" id="2_eh6rk"]
+[ext_resource type="Texture2D" uid="uid://046uewoxhbw2" path="res://Assets/Enemy/AsteroidDead.png" id="3_toimh"]
+[ext_resource type="AudioStream" uid="uid://ds3pxueq3ymkj" path="res://Assets/Sounds/Collision_Asteroid.mp3" id="4_hv05i"]
+
+[sub_resource type="Gradient" id="Gradient_yg83f"]
+offsets = PackedFloat32Array(0, 0.415584)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_48ea2"]
+gradient = SubResource("Gradient_yg83f")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3g5q"]
+atlas = ExtResource("1_k5155")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0otyn"]
+atlas = ExtResource("1_k5155")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fcmwk"]
+atlas = ExtResource("1_k5155")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6jcqj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3g5q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0otyn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fcmwk")
+}],
+"loop": true,
+"name": &"Flame",
+"speed": 10.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_864ys"]
+atlas = ExtResource("3_toimh")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oaeub"]
+atlas = ExtResource("3_toimh")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgvfj"]
+atlas = ExtResource("3_toimh")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8467"]
+atlas = ExtResource("3_toimh")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yo5kv"]
+atlas = ExtResource("3_toimh")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_isoc6"]
+atlas = ExtResource("3_toimh")
+region = Rect2(480, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kul53"]
+atlas = ExtResource("3_toimh")
+region = Rect2(576, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wspq8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_864ys")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oaeub")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pgvfj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8467")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yo5kv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_isoc6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kul53")
+}],
+"loop": false,
+"name": &"Dead",
+"speed": 11.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8h64b"]
+radius = 19.0263
+
+[node name="Asteroid" type="Node2D"]
+script = ExtResource("1_5wwmw")
+
+[node name="Asteroid" type="CharacterBody2D" parent="."]
+collision_layer = 8
+collision_mask = 6
+
+[node name="PointLight2D" type="PointLight2D" parent="Asteroid"]
+position = Vector2(0, -18)
+rotation = -1.5708
+scale = Vector2(1.4, 1.4)
+color = Color(0.996078, 0.831373, 0.168627, 1)
+texture = SubResource("GradientTexture2D_48ea2")
+
+[node name="Flame" type="AnimatedSprite2D" parent="Asteroid"]
+position = Vector2(0, -8)
+rotation = -1.5708
+scale = Vector2(1.4, 1.4)
+sprite_frames = SubResource("SpriteFrames_6jcqj")
+animation = &"Flame"
+autoplay = "Flame"
+
+[node name="Sprite2D" type="Sprite2D" parent="Asteroid"]
+texture = ExtResource("2_eh6rk")
+
+[node name="Dead" type="AnimatedSprite2D" parent="Asteroid"]
+sprite_frames = SubResource("SpriteFrames_wspq8")
+animation = &"Dead"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Asteroid"]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_8h64b")
+
+[node name="CollisionAsteroid" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_hv05i")
+volume_db = -15.0
+pitch_scale = 1.65
+max_distance = 1000.0
+attenuation = 10.5561

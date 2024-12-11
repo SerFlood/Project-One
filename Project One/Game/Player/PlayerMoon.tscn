@@ -1,0 +1,89 @@
+[gd_scene load_steps=7 format=3 uid="uid://cx1yfndcb0mrt"]
+
+[ext_resource type="Texture2D" uid="uid://bfwsnqgy05ui7" path="res://Assets/Planets/Baren.png" id="1_5rb4k"]
+[ext_resource type="Script" path="res://Scripts/Game/playermoon.gd" id="1_v70kc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fdm82"]
+radius = 25.0
+
+[sub_resource type="Animation" id="Animation_jdydd"]
+resource_name = "Moon_Animation"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Moon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Moon:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 3.14159, 6.28318]
+}
+
+[sub_resource type="Animation" id="Animation_el3l5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Moon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Moon:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2kik4"]
+_data = {
+"Moon_Animation": SubResource("Animation_jdydd"),
+"RESET": SubResource("Animation_el3l5")
+}
+
+[node name="PlayerMoon" type="Node2D"]
+script = ExtResource("1_v70kc")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+collision_layer = 2
+collision_mask = 8
+
+[node name="Moon" type="Sprite2D" parent="Player"]
+texture = ExtResource("1_5rb4k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CircleShape2D_fdm82")
+one_way_collision_margin = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+libraries = {
+"": SubResource("AnimationLibrary_2kik4")
+}
+autoplay = "Moon_Animation"

@@ -1,0 +1,112 @@
+[gd_scene load_steps=7 format=3 uid="uid://dlk142xqlcv2h"]
+
+[ext_resource type="Texture2D" uid="uid://maykrbgarwkr" path="res://Assets/Background/BGMenu.png" id="1_20hk4"]
+[ext_resource type="Script" path="res://Scripts/Settings/settings.gd" id="1_x75ng"]
+[ext_resource type="FontFile" uid="uid://cs6rpphca6sj7" path="res://Fonts/TitleFont.ttf" id="2_yfysk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wqttd"]
+font = ExtResource("2_yfysk")
+font_size = 25
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rkij4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eptxn"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x75ng")
+
+[node name="BGMenu" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 24.0
+offset_right = 236.0
+offset_bottom = 184.0
+scale = Vector2(1, 1.2)
+texture = ExtResource("1_20hk4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MenuContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 40
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="Title" type="VBoxContainer" parent="MenuContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MenuContainer/HBoxContainer/VBoxContainer/Title"]
+layout_mode = 2
+text = "seTTings"
+label_settings = SubResource("LabelSettings_wqttd")
+horizontal_alignment = 1
+
+[node name="Control2" type="Control" parent="MenuContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Audio" type="HBoxContainer" parent="MenuContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Sound" type="Label" parent="MenuContainer/HBoxContainer/VBoxContainer/Audio"]
+layout_mode = 2
+text = "Sound"
+
+[node name="AudioChange" type="Button" parent="MenuContainer/HBoxContainer/VBoxContainer/Audio"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rkij4")
+text = "On"
+flat = true
+
+[node name="Lang" type="HBoxContainer" parent="MenuContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Lang" type="Label" parent="MenuContainer/HBoxContainer/VBoxContainer/Lang"]
+layout_mode = 2
+text = "lang"
+
+[node name="LanguageChange" type="Button" parent="MenuContainer/HBoxContainer/VBoxContainer/Lang"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rkij4")
+text = "eng"
+flat = true
+
+[node name="Control" type="Control" parent="MenuContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Back" type="HBoxContainer" parent="MenuContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="Back" type="Button" parent="MenuContainer/HBoxContainer/VBoxContainer/Back"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_eptxn")
+text = "back"
+flat = true
+
+[connection signal="pressed" from="MenuContainer/HBoxContainer/VBoxContainer/Audio/AudioChange" to="." method="_on_audio_change_pressed"]
+[connection signal="pressed" from="MenuContainer/HBoxContainer/VBoxContainer/Lang/LanguageChange" to="." method="_on_language_change_pressed"]
+[connection signal="pressed" from="MenuContainer/HBoxContainer/VBoxContainer/Back/Back" to="." method="_on_back_pressed"]

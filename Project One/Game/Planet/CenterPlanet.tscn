@@ -1,0 +1,105 @@
+[gd_scene load_steps=8 format=3 uid="uid://d14gwogle0a05"]
+
+[ext_resource type="Texture2D" uid="uid://dohretgrxssc6" path="res://Assets/Planets/Terran.png" id="1_i4y0y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t20rg"]
+radius = 25.0
+
+[sub_resource type="Gradient" id="Gradient_0f2ey"]
+offsets = PackedFloat32Array(0, 0.466667)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+metadata/_snap_count = 15
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_k4vrt"]
+gradient = SubResource("Gradient_0f2ey")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="Animation" id="Animation_ck8d6"]
+resource_name = "CenterPlanet_Animation"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 3.14159, 6.28318]
+}
+
+[sub_resource type="Animation" id="Animation_33w6r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rvxld"]
+_data = {
+"CenterPlanet_Animation": SubResource("Animation_ck8d6"),
+"RESET": SubResource("Animation_33w6r")
+}
+
+[node name="CenterPlanet" type="Node2D"]
+
+[node name="CenterPlanet" type="CharacterBody2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="Sprite2D" type="Sprite2D" parent="CenterPlanet"]
+texture = ExtResource("1_i4y0y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CenterPlanet"]
+shape = SubResource("CircleShape2D_t20rg")
+
+[node name="PointLight2D" type="PointLight2D" parent="CenterPlanet"]
+visibility_layer = 512
+color = Color(0, 0.0495905, 1, 1)
+texture = SubResource("GradientTexture2D_k4vrt")
+texture_scale = 2.6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CenterPlanet"]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_rvxld")
+}
+autoplay = "CenterPlanet_Animation"

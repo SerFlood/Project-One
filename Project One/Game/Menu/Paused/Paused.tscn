@@ -1,0 +1,91 @@
+[gd_scene load_steps=10 format=3 uid="uid://crbt15gclnl6g"]
+
+[ext_resource type="Texture2D" uid="uid://maykrbgarwkr" path="res://Assets/Background/BGMenu.png" id="1_6di6s"]
+[ext_resource type="Script" path="res://Scripts/Paused/paused.gd" id="1_ewcqg"]
+[ext_resource type="FontFile" uid="uid://cs6rpphca6sj7" path="res://Fonts/TitleFont.ttf" id="2_vgm6l"]
+[ext_resource type="FontFile" uid="uid://cxw0o10ufgcuu" path="res://Fonts/SubtitleFont.ttf" id="3_wuywo"]
+[ext_resource type="Texture2D" uid="uid://dmtahujt25bb7" path="res://Assets/Planets/Ice.png" id="4_jsxtb"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0i1kr"]
+font = ExtResource("2_vgm6l")
+font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_ltvtf"]
+font = ExtResource("3_wuywo")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ivsqb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kbjm4"]
+
+[node name="Paused" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ewcqg")
+
+[node name="BGMenu" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 24.0
+offset_right = 236.0
+offset_bottom = 184.0
+scale = Vector2(1, 1.2)
+texture = ExtResource("1_6di6s")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MenuContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 40
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+alignment = 1
+
+[node name="Title" type="Label" parent="MenuContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "PausE"
+label_settings = SubResource("LabelSettings_0i1kr")
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="MenuContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Game"
+label_settings = SubResource("LabelSettings_ltvtf")
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MenuContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_jsxtb")
+stretch_mode = 5
+
+[node name="Continue" type="Button" parent="MenuContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ivsqb")
+text = "Continue"
+flat = true
+
+[node name="Menu" type="Button" parent="MenuContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kbjm4")
+text = "menu"
+flat = true
+
+[connection signal="pressed" from="MenuContainer/HBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="MenuContainer/HBoxContainer/VBoxContainer/Menu" to="." method="_on_menu_pressed"]

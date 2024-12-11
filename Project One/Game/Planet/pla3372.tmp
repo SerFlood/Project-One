@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cagth02q4q6p6"]
+
+[ext_resource type="Texture2D" uid="uid://dohretgrxssc6" path="res://Assets/Planets/Terran.png" id="1_pirwp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s4of1"]
+radius = 24.0
+
+[node name="Planet" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.90735e-06, 1.90735e-06)
+scale = Vector2(0.833333, 0.833333)
+texture = ExtResource("1_pirwp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_s4of1")

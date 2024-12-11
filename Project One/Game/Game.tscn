@@ -1,0 +1,103 @@
+[gd_scene load_steps=12 format=3 uid="uid://duycbjnf85r3h"]
+
+[ext_resource type="Texture2D" uid="uid://wv0dq36qyra0" path="res://Assets/Background/BG.png" id="1_0rnw0"]
+[ext_resource type="PackedScene" uid="uid://d14gwogle0a05" path="res://Game/Planet/CenterPlanet.tscn" id="3_dstwo"]
+[ext_resource type="PackedScene" uid="uid://cx1yfndcb0mrt" path="res://Game/Player/PlayerMoon.tscn" id="4_afoje"]
+[ext_resource type="PackedScene" uid="uid://csneqmc0531sq" path="res://Game/Asteroid/Asteroid.tscn" id="5_a3gl0"]
+[ext_resource type="Texture2D" uid="uid://be735j0ch2j8o" path="res://Rat.png" id="6_g43lp"]
+[ext_resource type="PackedScene" uid="uid://cytvqlit207sw" path="res://Game/Menu/Guide.tscn" id="7_fojl7"]
+[ext_resource type="AudioStream" uid="uid://bwcpqb58xx60q" path="res://Assets/Sounds/Ambient_one.mp3" id="7_hlt5o"]
+[ext_resource type="PackedScene" uid="uid://crbt15gclnl6g" path="res://Game/Menu/Paused/Paused.tscn" id="8_d70cs"]
+[ext_resource type="PackedScene" uid="uid://dlk142xqlcv2h" path="res://Game/Menu/Settings/Settings.tscn" id="8_rakpt"]
+[ext_resource type="PackedScene" uid="uid://clnshbmep23tn" path="res://Game/Menu/Menu.tscn" id="8_rkmlv"]
+[ext_resource type="PackedScene" uid="uid://du1r3tsq7of7o" path="res://Game/Menu/GameOver/GameOver.tscn" id="9_br62h"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_repeat = 2
+position = Vector2(128, 128)
+scale = Vector2(0.271875, 0.271875)
+texture = ExtResource("1_0rnw0")
+region_enabled = true
+region_rect = Rect2(0, 0, 1280, 1280)
+
+[node name="CenterPlanet" parent="." instance=ExtResource("3_dstwo")]
+position = Vector2(125, 120)
+scale = Vector2(0.920001, 0.920001)
+
+[node name="PlayerMoon" parent="." instance=ExtResource("4_afoje")]
+position = Vector2(169, 128)
+scale = Vector2(0.498333, 0.498333)
+
+[node name="Asteroid" parent="." instance=ExtResource("5_a3gl0")]
+position = Vector2(125, -46)
+scale = Vector2(0.466777, 0.466777)
+
+[node name="Asteroid2" parent="." instance=ExtResource("5_a3gl0")]
+position = Vector2(-132, 120)
+rotation = -1.57079
+scale = Vector2(0.466777, 0.466777)
+
+[node name="Asteroid3" parent="." instance=ExtResource("5_a3gl0")]
+position = Vector2(325, 120)
+rotation = -4.71238
+scale = Vector2(0.466777, 0.466777)
+
+[node name="Asteroid4" parent="." instance=ExtResource("5_a3gl0")]
+position = Vector2(125, 382)
+rotation = -3.14159
+scale = Vector2(0.466777, 0.466777)
+
+[node name="Asteroid5" parent="." instance=ExtResource("5_a3gl0")]
+position = Vector2(125, -190)
+scale = Vector2(0.466777, 0.466777)
+
+[node name="Asteroid6" parent="." instance=ExtResource("5_a3gl0")]
+position = Vector2(-316, 120)
+rotation = -1.57079
+scale = Vector2(0.466777, 0.466777)
+
+[node name="Asteroid7" parent="." instance=ExtResource("5_a3gl0")]
+position = Vector2(496, 120)
+rotation = -4.71238
+scale = Vector2(0.466777, 0.466777)
+
+[node name="Asteroid8" parent="." instance=ExtResource("5_a3gl0")]
+position = Vector2(125, 518)
+rotation = -3.14159
+scale = Vector2(0.466777, 0.466777)
+
+[node name="Rat" type="Sprite2D" parent="."]
+position = Vector2(394, -139)
+rotation = 0.785397
+scale = Vector2(8.875, 8.875)
+texture = ExtResource("6_g43lp")
+
+[node name="AmbientOne" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("7_hlt5o")
+volume_db = -20.0
+autoplay = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Guide" parent="CanvasLayer" instance=ExtResource("7_fojl7")]
+visible = false
+
+[node name="Settings" parent="CanvasLayer" instance=ExtResource("8_rakpt")]
+process_mode = 3
+visible = false
+
+[node name="Paused" parent="CanvasLayer" instance=ExtResource("8_d70cs")]
+process_mode = 3
+visible = false
+
+[node name="GameOver" parent="CanvasLayer" instance=ExtResource("9_br62h")]
+process_mode = 3
+visible = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Menu" parent="CanvasLayer" instance=ExtResource("8_rkmlv")]
+process_mode = 3
+metadata/_edit_use_anchors_ = true
