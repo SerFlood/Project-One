@@ -8,12 +8,10 @@ func _ready() -> void:
 	load_game()
 	save_dict["game_entries"] += 1
 	save_game()
-	print("Количество заходов в игру: ", save_dict["game_entries"])
 
 func save_game():
 	var save_file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
 	if save_file == null:
-		print("Не удалось открыть файл для записи.")
 		return
 
 	var json_string = JSON.stringify(save_dict)
@@ -26,7 +24,6 @@ func load_game():
 	
 	var save_file = FileAccess.open("user://savegame.save", FileAccess.READ)
 	if save_file == null:
-		print("Не удалось открыть файл для чтения.")
 		return
 
 	var json_string = save_file.get_line()

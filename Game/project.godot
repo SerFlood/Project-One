@@ -24,6 +24,7 @@ boot_splash/minimum_display_time=500
 [autoload]
 
 Global="*res://Scripts/global.gd"
+SettingSave="*res://Scripts/settingSave.gd"
 
 [display]
 
@@ -32,6 +33,7 @@ window/size/viewport_height=240
 window/size/window_width_override=1024
 window/size/window_height_override=960
 window/stretch/mode="canvas_items"
+window/handheld/orientation=1
 
 [gui]
 
